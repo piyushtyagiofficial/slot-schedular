@@ -1,9 +1,11 @@
 import dotenv from 'dotenv';
+import { Knex } from 'knex';
+
 dotenv.config();
 
-export default {
+const config: { [key: string]: Knex.Config } = {
   development: {
-    client: process.env.DB_CLIENT,
+    client: process.env.DB_CLIENT || 'pg',
     connection: {
       host: process.env.DB_HOST,
       port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
@@ -17,3 +19,5 @@ export default {
     },
   },
 };
+
+export default config;
